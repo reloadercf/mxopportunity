@@ -15,7 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
+from django.views.static import serve
+from django.conf import settings
+from rest_framework import routers
+
+
+router = routers.DefaultRouter()
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(
+        regex=r'^media/(?P<path>.*)$',
+        view=serve,
+        kwargs={'document_root': settings.MEDIA_ROOT}
+    ),
+    path('article/', include(router.urls)),
 ]
