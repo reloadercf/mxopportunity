@@ -5,19 +5,12 @@ from django.contrib.auth.models import User
 from  .utils import unique_slug_generator
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
-
+from revista.models import Revista
 
 
 class Perfil(models.Model):
     correo      = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
-    foto        = models.ImageField(upload_to='images', blank=True, null=True)
-    biografia   =models.TextField(blank=True, null=True)
-    telefono    =models.CharField(blank=True,null=True, max_length=20)
-    nombre      =models.CharField(blank=True,null=True,max_length=100)
-    facebook    =models.URLField(blank=True,null=True)
-    instagram   =models.URLField(blank=True,null=True)
-    twitter     =models.URLField(blank=True,null=True)
-    intereses   =models.TextField()
+    revista     = models.ForeignKey("revista.Revista",blank=True,null=True, on_delete=models.CASCADE)
     slug        = models.SlugField(unique=True, blank=True)
 
     def __str__(self):

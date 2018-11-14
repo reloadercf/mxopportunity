@@ -30,6 +30,5 @@ urlpatterns = [
         regex=r'^media/(?P<path>.*)$',
         view=serve,
         kwargs={'document_root': settings.MEDIA_ROOT}
-    ),
-    path('article/', include(router.urls)),
+    )
 ]
