@@ -16,7 +16,8 @@ llamadas=(
     ("Contactar","Contactar"),
     ("Visitar","Visitar"),
     ("Compar","Comprar"),
-    ("Llamar","Llamar")
+    ("Llamar","Llamar"),
+    ("Sinllamada","Sinllamada")
 )
 #El modelo
 
@@ -28,13 +29,17 @@ class Articulo(models.Model):
     imagen_destacada_uno    =   models.FileField(upload_to='articulos/uno/',blank=False)
     redactado_por           =   models.CharField(default="Equipo MX OPPORTUNITY",max_length=300,null=True,blank=True)
     status                  =   models.CharField(choices=status_articulo_choice,default="Publicado", max_length=50)
-    cuerpo                  =   models.TextField(null=False,blank=False)
+    cuerpo_uno              =   models.TextField(null=False,blank=False)
     imagen_destacada_dos    =   models.FileField(upload_to="articulos/dos/", max_length=100)
+    cuerpo_dos              =   models.TextField(null=False,blank=False)
     video_tipo              =   models.CharField(choices=video_choice, default="sin video", max_length=50)
     urlvideo                =   models.URLField(blank=True,null=True)
-    llamada_accion          =   models.CharField(choices=llamadas,max_length=50)
-    imagen_llamada          =   models.FileField(upload_to="llamadas")
-    url_llamada             =   models.URLField()
+    llamada_accion_uno      =   models.CharField(choices=llamadas,max_length=50)
+    imagen_llamada_uno      =   models.FileField(upload_to="llamadas",blank=True,null=True)
+    url_llamada_uno         =   models.URLField(blank=True,null=True)
+    llamada_accion_dos      =   models.CharField(choices=llamadas,max_length=50)
+    imagen_llamada_dos      =   models.FileField(upload_to="llamadas",blank=True,null=True)
+    url_llamada_dos         =   models.URLField(blank=True,null=True)
     cortesia_de             =   models.CharField(max_length=300,null=True,blank=True)
     fecha_mostrada          =   models.DateField(blank=False,null=False)
     fecha_publicacion       =   models.DateTimeField(blank=False,null=False)
