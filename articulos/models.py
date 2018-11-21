@@ -1,5 +1,7 @@
 from django.db import models
 from revista.models import Revista
+from .utils import unique_slug_generator
+from django.db.models.signals import pre_save, post_save
 
 # Create your models here.
 #los choices
@@ -31,7 +33,7 @@ class Articulo(models.Model):
     status                  =   models.CharField(choices=status_articulo_choice,default="Publicado", max_length=50)
     cuerpo_uno              =   models.TextField(null=False,blank=False)
     imagen_destacada_dos    =   models.FileField(upload_to="articulos/dos/", max_length=100)
-    cuerpo_dos              =   models.TextField(null=False,blank=False)
+    cuerpo_dos              =   models.TextField(null=True,blank=True)
     video_tipo              =   models.CharField(choices=video_choice, default="sin video", max_length=50)
     urlvideo                =   models.URLField(blank=True,null=True)
     llamada_accion_uno      =   models.CharField(choices=llamadas,max_length=50)
@@ -46,6 +48,23 @@ class Articulo(models.Model):
     fecha_fin               =   models.DateTimeField(blank=False,null=False)
     fecha_creacion          =   models.DateTimeField(auto_now_add=True)
     fecha_modificacion      =   models.DateTimeField(auto_now=True)
+    slug                    =   models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
         return self.titulo
+
+# Esta funcion genera un SLUG para cada articulo
+def rl_pre_save_receiver(sender, instance, *args, **kwargs):
+    if not instance.slug:
+        instance.slug = unique_slug_generator(instance)
+pre_save.connect(rl_pre_save_receiver, sender=Articulo)
+
+
+
+# Esta funcion genera un SLUG para cada articulo
+def pre_save_articulo(sender, instance, *args, **kwargs):
+    if not instance.titulo:
+        instance.titulo = '%s' % (instance.articulo.titulo)
+
+
+pre_save.connect(pre_save_articulo, sender=Articulo)

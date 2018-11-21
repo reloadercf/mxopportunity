@@ -14,18 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path,include
 from django.conf.urls import url
 from django.views.static import serve
 from django.conf import settings
 from rest_framework import routers
-
+from rest_framework.authtoken import views
+from articulos.views import ArticuloViewSet
+from revista.views import CategoriaRevistaViewSet
 
 router = routers.DefaultRouter()
+router.register('filtroarticulos', ArticuloViewSet)
+router.register('filtrocategoria',CategoriaRevistaViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api-token-auth/', views.obtain_auth_token),
+    path('publicar/', include(router.urls)),
     url(
         regex=r'^media/(?P<path>.*)$',
         view=serve,
