@@ -32,7 +32,7 @@ class Articulo(models.Model):
     redactado_por           =   models.CharField(default="Equipo MX OPPORTUNITY",max_length=300,null=True,blank=True)
     status                  =   models.CharField(choices=status_articulo_choice,default="Publicado", max_length=50)
     cuerpo_uno              =   models.TextField(null=False,blank=False)
-    imagen_destacada_dos    =   models.FileField(upload_to="articulos/dos/", max_length=100)
+    imagen_destacada_dos    =   models.FileField(upload_to="articulos/dos/",blank=True,null=True)
     cuerpo_dos              =   models.TextField(null=True,blank=True)
     video_tipo              =   models.CharField(choices=video_choice, default="sin video", max_length=50)
     urlvideo                =   models.URLField(blank=True,null=True)

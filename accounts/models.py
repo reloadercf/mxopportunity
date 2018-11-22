@@ -9,21 +9,21 @@ from revista.models import Revista
 
 
 class Perfil(models.Model):
-    correo      = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
-    revista     = models.ForeignKey("revista.Revista",blank=True,null=True, on_delete=models.CASCADE)
+    user        = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)    
+    revista     = models.ForeignKey(Revista,related_name='revista_perfil',blank=True,null=True, on_delete=models.CASCADE)
     slug        = models.SlugField(unique=True, blank=True)
 
     def __str__(self):
-        return self.correo.username
+        return self.user.username
 
     @property
     def username(self):
-        return self.correo.username
+        return self.user.username
 
 
 # @property
     def nombre_completo(self):
-        return '%s %s' % (self.correo.first_name, self.correo.last_name)
+        return '%s %s' % (self.user.first_name, self.user.last_name)
 
 
 def rl_pre_save_receiver(sender, instance, *args, **kwargs):
@@ -37,7 +37,7 @@ pre_save.connect(rl_pre_save_receiver, sender=Perfil)
 @receiver(post_save, sender=User)
 def ensure_profile_exists(sender, **kwargs):
     if kwargs.get('created', False):
-        Perfil.objects.get_or_create(correo=kwargs.get('instance'))
+        Perfil.objects.get_or_create(user=kwargs.get('instance'))
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)

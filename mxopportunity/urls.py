@@ -22,16 +22,19 @@ from rest_framework import routers
 from rest_framework.authtoken import views
 from articulos.views import ArticuloViewSet
 from revista.views import CategoriaRevistaViewSet
+from accounts.views import UserViewSet, MyUser
 
 router = routers.DefaultRouter()
 router.register('filtroarticulos', ArticuloViewSet)
 router.register('filtrocategoria',CategoriaRevistaViewSet)
+router.register('users', UserViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-token-auth/', views.obtain_auth_token),
     path('publicar/', include(router.urls)),
+    path('my_user/', MyUser.as_view()),
     url(
         regex=r'^media/(?P<path>.*)$',
         view=serve,
