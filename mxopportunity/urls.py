@@ -20,12 +20,13 @@ from django.views.static import serve
 from django.conf import settings
 from rest_framework import routers
 from rest_framework.authtoken import views
-from articulos.views import ArticuloViewSet
+from articulos.views import ArticuloViewSet,EspecialArticuloViewSet
 from revista.views import CategoriaRevistaViewSet
 from accounts.views import UserViewSet, MyUser
 
 router = routers.DefaultRouter()
 router.register('filtroarticulos', ArticuloViewSet)
+router.register('filtroespecialarticulo', EspecialArticuloViewSet)
 router.register('filtrocategoria',CategoriaRevistaViewSet)
 router.register('users', UserViewSet)
 

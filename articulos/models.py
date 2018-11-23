@@ -45,7 +45,7 @@ class Articulo(models.Model):
     cortesia_de             =   models.CharField(max_length=300,null=True,blank=True)
     fecha_mostrada          =   models.DateField(blank=False,null=False)
     fecha_publicacion       =   models.DateTimeField(blank=False,null=False)
-    fecha_fin               =   models.DateTimeField(blank=False,null=False)
+    fecha_fin               =   models.DateField(blank=False,null=False)
     fecha_creacion          =   models.DateTimeField(auto_now_add=True)
     fecha_modificacion      =   models.DateTimeField(auto_now=True)
     slug                    =   models.CharField(max_length=200, blank=True, null=True)
