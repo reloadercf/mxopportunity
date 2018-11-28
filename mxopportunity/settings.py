@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '5e%t&n3k+h&=8!)c)^)41!z#qt^y^tn_$57b2j98vk-88@_p7@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -83,8 +83,12 @@ WSGI_APPLICATION = 'mxopportunity.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '*',
+        'USER': '*',
+        'PASSWORD': '*',
+        'HOST': '*',
+        'PORT': '',
     }
 }
 
@@ -158,8 +162,11 @@ UTHENTICATION_BACKENDS = (
 )
 
 
-
 STATIC_URL = '/static/'
-STATIC_ROOT = '/static/'
-MEDIA_ROOT = 'media'
+STATIC_ROOT ='static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+STATICFILES_DIRS =[
+    os.path.join(BASE_DIR, "static/")
+]
