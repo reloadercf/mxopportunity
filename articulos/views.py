@@ -4,6 +4,8 @@ from revista.models import Revista
 from .serializers import ArticuloSerializer,EspecialArticulo
 from rest_framework import viewsets
 from .pagination import ArticlePagination
+from django.db.models import Q
+from datetime import *
 # Create your views here.
 
 class ArticuloViewSet(viewsets.ModelViewSet):
@@ -35,7 +37,7 @@ class EspecialArticuloViewSet(viewsets.ModelViewSet):
         titulo          =       self.request.GET.get("slug")
         portada         =       self.request.GET.get("portada")
         status          =       self.request.GET.get("status")
-        fin             =       self.request.GET.get("fin")
+
         queryset_list = super(EspecialArticuloViewSet, self).get_queryset()
         if categoria:
             queryset_list = queryset_list.filter(categoria=categoria)
@@ -47,6 +49,4 @@ class EspecialArticuloViewSet(viewsets.ModelViewSet):
             queryset_list = queryset_list.filter(en_portada=portada)
         if status:
             queryset_list = queryset_list.filter(status=status)
-        if fin:
-            queryset_list = queryset_list.filter(fecha_fin>fin)
         return queryset_list

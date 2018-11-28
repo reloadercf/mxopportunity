@@ -42,3 +42,5 @@ urlpatterns = [
         kwargs={'document_root': settings.MEDIA_ROOT}
     )
 ]
+admin.site.site_header='Opportunity'
+admin.site.index_title='Administracion General de Opportunity'
