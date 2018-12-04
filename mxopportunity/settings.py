@@ -84,10 +84,10 @@ WSGI_APPLICATION = 'mxopportunity.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '*',
-        'USER': '*',
-        'PASSWORD': '*',
-        'HOST': '*',
+        'NAME': 'opportunity',
+        'USER': 'romlalocarlos',
+        'PASSWORD': 'opportunity',
+        'HOST': 'localhost',
         'PORT': '',
     }
 }
@@ -140,7 +140,7 @@ REST_FRAMEWORK = {
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
-LANGUAGE_CODE = 'es'
+LANGUAGE_CODE = 'es-us'
 
 TIME_ZONE = 'America/Mexico_City'
 
@@ -163,7 +163,7 @@ UTHENTICATION_BACKENDS = (
 
 
 STATIC_URL = '/static/'
-STATIC_ROOT ='static/'
+STATIC_ROOT = os.path.join(BASE_DIR,"/static/")
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 

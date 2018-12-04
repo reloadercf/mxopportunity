@@ -23,6 +23,10 @@ from rest_framework.authtoken import views
 from articulos.views import ArticuloViewSet,EspecialArticuloViewSet
 from revista.views import CategoriaRevistaViewSet
 from accounts.views import UserViewSet, MyUser
+from django.views.generic import TemplateView
+
+class inicio(TemplateView):
+    template_name = 'index.html'
 
 router = routers.DefaultRouter()
 router.register('filtroarticulos', ArticuloViewSet)
@@ -32,6 +36,7 @@ router.register('users', UserViewSet)
 
 
 urlpatterns = [
+    path('',inicio.as_view(),name='index'),
     path('admin/', admin.site.urls),
     path('api-token-auth/', views.obtain_auth_token),
     path('publicar/', include(router.urls)),
