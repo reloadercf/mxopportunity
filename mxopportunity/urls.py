@@ -24,6 +24,7 @@ from articulos.views import ArticuloViewSet,EspecialArticuloViewSet
 from revista.views import CategoriaRevistaViewSet
 from accounts.views import UserViewSet, MyUser
 from django.views.generic import TemplateView
+from cliente.views import ClienteViewSet, PlanesViewSet
 
 class inicio(TemplateView):
     template_name = 'index.html'
@@ -33,6 +34,8 @@ router.register('filtroarticulos', ArticuloViewSet)
 router.register('filtroespecialarticulo', EspecialArticuloViewSet)
 router.register('filtrocategoria',CategoriaRevistaViewSet)
 router.register('users', UserViewSet)
+router.register('patrocinadores',ClienteViewSet)
+router.register('planesporrevista',PlanesViewSet)
 
 
 urlpatterns = [

@@ -3,7 +3,6 @@ from .models import Articulo
 from revista.models import Revista
 from .serializers import ArticuloSerializer,EspecialArticulo
 from rest_framework import viewsets
-from .pagination import ArticlePagination
 from django.db.models import Q
 from datetime import *
 # Create your views here.
@@ -11,7 +10,6 @@ from datetime import *
 class ArticuloViewSet(viewsets.ModelViewSet):
     queryset = Articulo.objects.all()
     serializer_class = ArticuloSerializer
-    pagination_class = ArticlePagination
 
     def get_queryset(self,*args,**kwargs):
         categoria       =       self.request.GET.get("q")
@@ -29,7 +27,6 @@ class ArticuloViewSet(viewsets.ModelViewSet):
 class EspecialArticuloViewSet(viewsets.ModelViewSet):
     queryset = Articulo.objects.all()
     serializer_class = EspecialArticulo
-    pagination_class = ArticlePagination
 
     def get_queryset(self,*args,**kwargs):
         categoria       =       self.request.GET.get("q")

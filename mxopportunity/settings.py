@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'revista',
+    'cliente',
+    'import_export',
 
 ]
 
