@@ -10,7 +10,7 @@ class Categorias(models.Model):
 
 class Revista(models.Model):
     nombre_revista          =   models.CharField(max_length=80, blank=False, null=False)
-    logo                    =   models.ImageField(upload_to="logos_revistas",blank=False, null=False)
+    logo                    =   models.TextField()
     descripcion             =   models.TextField()
     def __str__(self):
         return self.nombre_revista
